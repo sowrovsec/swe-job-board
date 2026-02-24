@@ -143,6 +143,17 @@ mainContainer.addEventListener('click', function(event) {
         allList = allList.filter(item => item.company !== companyText);
         interviewList = interviewList.filter(item => item.company !== companyText);
     }
+ // when delete button clicked
+    else if(event.target.classList.contains('delete-btn')) {
+        const parenNode = event.target.parentNode.parentNode;
+        const companyText = parenNode.querySelector('.companyName').innerText;
 
+        // remove all from array
+        allList = allList.filter(item => item.company !== companyText);
+        interviewList = interviewList.filter(item => item.company !== companyText);
+        rejectedList = rejectedList.filter(item => item.company !== companyText);
+    }
+
+    
     
 });
