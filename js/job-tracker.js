@@ -26,3 +26,31 @@ function calculateCount() {
     rejectedCount.innerText = rejectedList.length;
 }
 
+
+// 4. Toggle Styles 
+function toggleStyle(id) {
+    
+    const allTabs = document.querySelectorAll('.tab-btn');
+    for(let tab of allTabs) {
+        tab.classList.remove('bg-blue-600', 'text-white');
+        tab.classList.add('bg-white', 'text-gray-700');
+    }
+
+    
+    const selected = document.getElementById(id);
+    selected.classList.remove('bg-white', 'text-gray-700');
+    selected.classList.add('bg-blue-600', 'text-white');
+
+    // show  the correct array based on tab click
+    if (id === 'all-tab-btn') {
+        activeTab = 'All';
+        renderCards(allList, 'All');
+    } else if (id === 'int-tab-btn') {
+        activeTab = 'Interview';
+        renderCards(interviewList, 'Interview');
+    } else if (id === 'rej-tab-btn') {
+        activeTab = 'Rejected';
+        renderCards(rejectedList, 'Rejected');
+    }
+}
+
