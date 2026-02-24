@@ -1,57 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SWE JOB TRACKER</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles/style.css" />
 </head>
-<body>
 
-<div class="flex items-center justify-center h-screen">
-     <div class="card w-96 bg-base-100 shadow-sm">
-  <div class="card-body">
-    <span class="badge badge-xs badge-warning">Most Popular</span>
-    <div class="flex justify-between">
-      <h2 class="text-3xl font-bold">Premium</h2>
-      <span class="text-xl">$29/mo</span>
+<body class="bg-gray-100 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold text-gray-800 mb-8">SWE Job Tracker</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white p-5 rounded-lg shadow-sm">
+                <p class="text-sm text-gray-500">Total</p>
+                <p id="totalCount" class="text-xl font-semibold mt-1">0</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-lg shadow-sm">
+                <p class="text-sm text-gray-500">Interview</p>
+                <p id="interviewCount" class="text-xl font-semibold text-green-600 mt-1">
+                    0
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-lg shadow-sm">
+                <p class="text-sm text-gray-500">Rejected</p>
+                <p id="rejectedCount" class="text-xl font-semibold text-red-500 mt-1">
+                    0
+                </p>
+            </div>
+        </div>
+
+        <!-- available jobs -->
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-semibold text-gray-800">Available Jobs</h2>
+            <p id="availableCount" class="text-sm text-gray-500">0 jobs</p>
+        </div>
+
+        <!-- tabs for selecting  -->
+        <div class="flex gap-2 mb-6">
+            <button id="allTab" class="tab-btn bg-blue-600 text-white px-4 py-1.5 rounded-md text-sm">
+                All
+            </button>
+
+            <button id="interviewTab" class="tab-btn bg-gray-200 text-gray-700 px-4 py-1.5 rounded-md text-sm">
+                Interview
+            </button>
+
+            <button id="rejectedTab" class="tab-btn bg-gray-200 text-gray-700 px-4 py-1.5 rounded-md text-sm">
+                Rejected
+            </button>
+        </div>
+
+        <!-- show joblist according to tabs -->
+        <div id="jobContainer" class="space-y-4"></div>
+ <!-- No Jobs  -->
+        <div class="text-center bg-white py-10 text-gray-500 rounded-2xl">
+           
+            <div class="flex justify-center mb-4">
+                <img src="./assets/images/jobs.png" alt="No jobs "
+                    class="w-40 h-auto opacity-80" />
+            </div>
+
+            <p class="font-medium text-lg">No Jobs Available</p>
+            <p class="text-sm mt-1">Check back soon for new job opportunities</p>
+        </div>
     </div>
-    <ul class="mt-6 flex flex-col gap-2 text-xs">
-      <li>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-        <span>High-resolution image generation</span>
-      </li>
-      <li>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-        <span>Customizable style templates</span>
-      </li>
-      <li>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-        <span>Batch processing capabilities</span>
-      </li>
-      <li>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-        <span>AI-driven image enhancements</span>
-      </li>
-      <li class="opacity-50">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 me-2 inline-block text-base-content/50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-        <span class="line-through">Seamless cloud integration</span>
-      </li>
-      <li class="opacity-50">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 me-2 inline-block text-base-content/50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-        <span class="line-through">Real-time collaboration tools</span>
-      </li>
-    </ul>
-    <div class="mt-6">
-      <button class="btn btn-primary btn-block">Subscribe</button>
-    </div>
-  </div>
-</div>
-</div>
- 
 
     <script src="js/job-tracker.js"></script>
 </body>
+
 </html>
