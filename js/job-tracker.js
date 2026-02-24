@@ -153,7 +153,12 @@ mainContainer.addEventListener('click', function(event) {
         interviewList = interviewList.filter(item => item.company !== companyText);
         rejectedList = rejectedList.filter(item => item.company !== companyText);
     }
-
+  // show updated job list
+    if (activeTab === 'All') renderCards(allList, 'All');
+    else if (activeTab === 'Interview') renderCards(interviewList, 'Interview');
+    else if (activeTab === 'Rejected') renderCards(rejectedList, 'Rejected');
     
     
 });
+
+renderCards(allList, 'All');
