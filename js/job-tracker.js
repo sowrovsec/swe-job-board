@@ -1,12 +1,63 @@
 let allList = [
-    { company: "CyberShield Security", position: "Security Analyst", details: "Remote • Full-time • $110,000", desc: "Monitor network traffic for security breaches.", status: "Not Applied" },
-    { company: "NextGen Robotics", position: "Embedded Systems", details: "Tokyo, Japan • Full-time • $150,000", desc: "Develop firmware for autonomous robotic systems.", status: "Not Applied" },
-    { company: "HealthSync", position: "iOS Developer", details: "London, UK • Contract • $90,000", desc: "Build and maintain healthcare tracking applications.", status: "Not Applied" },
-    { company: "FinTech Dynamics", position: "Blockchain Developer", details: "Miami, FL • Full-time • $160,000", desc: "Design smart contracts for financial services.", status: "Not Applied" }
+    {
+        company: "RedVault Cyber Defense",
+        position: "Penetration Tester",
+        details: "Remote • Full-time • $125,000",
+        desc: "Conduct advanced penetration tests and simulate real-world cyber attacks to identify system vulnerabilities.",
+        status: "Not Applied"
+    },
+    {
+        company: "Orion Autonomous Systems",
+        position: "AI Robotics Engineer",
+        details: "Tokyo, Japan • Full-time • $170,000",
+        desc: "Design and implement intelligent control systems for next-generation autonomous robots.",
+        status: "Not Applied"
+    },
+    {
+        company: "MediCore Digital",
+        position: "Senior Mobile Engineer",
+        details: "London, UK • Contract • $105,000",
+        desc: "Lead the development of secure mobile health applications with real-time data synchronization.",
+        status: "Not Applied"
+    },
+    {
+        company: "BlockSphere Technologies",
+        position: "Web3 Infrastructure Engineer",
+        details: "Miami, FL • Full-time • $180,000",
+        desc: "Build scalable blockchain infrastructure and optimize distributed ledger performance.",
+        status: "Not Applied"
+    },
+    {
+        company: "Nimbus Secure Cloud",
+        position: "Cloud Security Architect",
+        details: "Toronto, Canada • Full-time • $165,000",
+        desc: "Architect secure multi-cloud environments and enforce enterprise-level security standards.",
+        status: "Not Applied"
+    },
+    {
+        company: "NeuralStack Analytics",
+        position: "Machine Learning Engineer",
+        details: "Berlin, Germany • Full-time • $155,000",
+        desc: "Develop production-ready ML pipelines and deploy predictive analytics systems.",
+        status: "Not Applied"
+    },
+    {
+        company: "CoreKernel Labs",
+        position: "Systems Programmer (C/C++)",
+        details: "Austin, TX • Full-time • $145,000",
+        desc: "Build high-performance system-level software and optimize low-level memory operations.",
+        status: "Not Applied"
+    },
+    {
+        company: "VertexScale Innovations",
+        position: "Full Stack TypeScript Engineer",
+        details: "Remote • Full-time • $140,000",
+        desc: "Develop scalable web applications using modern TypeScript frameworks and secure backend APIs.",
+        status: "Not Applied"
+    }
 ];
 
-let interviewList = [];
-let rejectedList = [];
+
 
 let activeTab = 'All'; 
 
@@ -19,72 +70,62 @@ const cardsSection = document.getElementById('cardsSection');
 const emptyState = document.getElementById('emptyState');
 const mainContainer = document.getElementById('mainContainer');
 
-        // counter function 
+
+// counter
 function calculateCount() {
-    totalCount.innerText = allList.length + interviewList.length + rejectedList.length;
-    interviewCount.innerText = interviewList.length;
-    rejectedCount.innerText = rejectedList.length;
-}
 
+    let interview = 0;
+    let rejected = 0;
 
-// 4. Toggle tab and change style
-function toggleStyle(id) {
-    
-    const allTabs = document.querySelectorAll('.tab-btn');
-    for(let tab of allTabs) {
-        tab.classList.remove('bg-blue-600', 'text-white');
-        tab.classList.add('bg-white', 'text-gray-700');
+    for (let job of allList) {
+        if (job.status === "Interview") interview++;
+        if (job.status === "Rejected") rejected++;
     }
 
-    
-    const selected = document.getElementById(id);
-    selected.classList.remove('bg-white', 'text-gray-700');
-    selected.classList.add('bg-blue-600', 'text-white');
-
-    // show  the correct array based on tab click
-    if (id === 'all-tab-btn') {
-        activeTab = 'All';
-        renderCards(allList, 'All');
-    } else if (id === 'int-tab-btn') {
-        activeTab = 'Interview';
-        renderCards(interviewList, 'Interview');
-    } else if (id === 'rej-tab-btn') {
-        activeTab = 'Rejected';
-        renderCards(rejectedList, 'Rejected');
-    }
+    totalCount.innerText = allList.length;
+    interviewCount.innerText = interview;
+    rejectedCount.innerText = rejected;
 }
+
 
 //  Render Function 
-function renderCards(listToRender, currentStatus) {
-    cardsSection.innerHTML = ''; 
+function renderCards() {
 
-    // check emptyjob and show  empty section
-    if(listToRender.length === 0) {
+    cardsSection.innerHTML = '';
+
+    let listToRender = [];
+
+    if (activeTab === 'All') {
+        listToRender = allList;
+    } else {
+        listToRender = allList.filter(job => job.status === activeTab);
+    }
+
+    // Empty State
+    if (listToRender.length === 0) {
         emptyState.classList.remove('hidden');
     } else {
         emptyState.classList.add('hidden');
     }
 
-    // Update available job
     availableCount.innerText = listToRender.length + " jobs";
 
     for (let job of listToRender) {
+
         let div = document.createElement('div');
         div.className = 'job-card bg-white p-5 rounded-lg shadow-sm border';
 
-      
-        let badge = `<span class="inline-block text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600">Not Applied</span>`;
-        let actionButtons = `
-            <button class="add-int-btn border border-green-500 text-green-600 text-sm px-3 py-1 rounded cursor-pointer">Interview</button>
-            <button class="add-rej-btn border border-red-500 text-red-600 text-sm px-3 py-1 rounded cursor-pointer">Rejected</button>
-        `;
+        // Badge based on status
+        let badge = '';
 
-        if (currentStatus === 'Interview') {
+        if (job.status === 'Interview') {
             badge = `<span class="inline-block text-xs px-2 py-1 rounded-full bg-green-100 text-green-700">Interview</span>`;
-            actionButtons = `<button class="add-rej-btn border border-red-500 text-red-600 text-sm px-3 py-1 rounded cursor-pointer">Move to Rejected</button>`;
-        } else if (currentStatus === 'Rejected') {
+        }
+        else if (job.status === 'Rejected') {
             badge = `<span class="inline-block text-xs px-2 py-1 rounded-full bg-red-100 text-red-700">Rejected</span>`;
-            actionButtons = `<button class="add-int-btn border border-green-500 text-green-600 text-sm px-3 py-1 rounded cursor-pointer">Move to Interview</button>`;
+        }
+        else {
+            badge = `<span class="inline-block text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600">Not Applied</span>`;
         }
 
         div.innerHTML = `
@@ -101,64 +142,79 @@ function renderCards(listToRender, currentStatus) {
             <div class="mt-2">${badge}</div>
             <p class="text-sm text-gray-600 mt-3">${job.desc}</p>
             <div class="mt-4 flex gap-3">
-                ${actionButtons}
+                <button class="add-int-btn border border-green-500 text-green-600 text-sm px-3 py-1 rounded cursor-pointer">Interview</button>
+                <button class="add-rej-btn border border-red-500 text-red-600 text-sm px-3 py-1 rounded cursor-pointer">Rejected</button>
             </div>
         `;
+
         cardsSection.appendChild(div);
     }
+
     calculateCount();
+}
 
 
+// Toggle tab and change style
+function toggleStyle(id) {
 
+    const allTabs = document.querySelectorAll('.tab-btn');
+
+    for (let tab of allTabs) {
+        tab.classList.remove('bg-blue-600', 'text-white');
+        tab.classList.add('bg-white', 'text-gray-700');
+    }
+
+    const selected = document.getElementById(id);
+    selected.classList.remove('bg-white', 'text-gray-700');
+    selected.classList.add('bg-blue-600', 'text-white');
+
+    if (id === 'all-tab-btn') activeTab = 'All';
+    else if (id === 'int-tab-btn') activeTab = 'Interview';
+    else if (id === 'rej-tab-btn') activeTab = 'Rejected';
+
+    renderCards();
 }
 
 
 // check which button is clicked and perform action base on that
 mainContainer.addEventListener('click', function(event) {
-    
-    // when interview btn click
-    if(event.target.classList.contains('add-int-btn')) {
-        const parenNode = event.target.parentNode.parentNode;
-        const companyText = parenNode.querySelector('.companyName').innerText; 
 
-        // Find job 
-        let jobObj = allList.find(item => item.company === companyText) || rejectedList.find(item => item.company === companyText);
-        
-        if(jobObj) interviewList.push(jobObj); 
+    const card = event.target.closest('.job-card');
+    if (!card) return;
 
-        // Remove from other arrays
-        allList = allList.filter(item => item.company !== companyText);
-        rejectedList = rejectedList.filter(item => item.company !== companyText);
+    const companyText = card.querySelector('.companyName').innerText;
+
+    let jobObj = allList.find(item => item.company === companyText);
+    if (!jobObj) return;
+
+    // Interview clicked
+    if (event.target.classList.contains('add-int-btn')) {
+
+        if (jobObj.status === 'Interview') {
+            jobObj.status = 'Not Applied';
+        } else {
+            jobObj.status = 'Interview';
+        }
     }
 
-    // when reject btn click
-    else if(event.target.classList.contains('add-rej-btn')) {
-        const parenNode = event.target.parentNode.parentNode;
-        const companyText = parenNode.querySelector('.companyName').innerText;
+    // Rejected clicked
+    else if (event.target.classList.contains('add-rej-btn')) {
 
-        let jobObj = allList.find(item => item.company === companyText) || interviewList.find(item => item.company === companyText);
-        
-        if(jobObj) rejectedList.push(jobObj);
+        if (jobObj.status === 'Rejected') {
+            jobObj.status = 'Not Applied';
+        } else {
+            jobObj.status = 'Rejected';
+        }
+    }
+
+    // Delete clicked
+    else if (event.target.closest('.delete-btn')) {
 
         allList = allList.filter(item => item.company !== companyText);
-        interviewList = interviewList.filter(item => item.company !== companyText);
     }
- // when delete button clicked
-    else if(event.target.classList.contains('delete-btn')) {
-        const parenNode = event.target.parentNode.parentNode;
-        const companyText = parenNode.querySelector('.companyName').innerText;
 
-        // remove all from array
-        allList = allList.filter(item => item.company !== companyText);
-        interviewList = interviewList.filter(item => item.company !== companyText);
-        rejectedList = rejectedList.filter(item => item.company !== companyText);
-    }
-  // show updated job list
-    if (activeTab === 'All') renderCards(allList, 'All');
-    else if (activeTab === 'Interview') renderCards(interviewList, 'Interview');
-    else if (activeTab === 'Rejected') renderCards(rejectedList, 'Rejected');
-    
-    
+    renderCards();
 });
 
-renderCards(allList, 'All');
+
+renderCards();
