@@ -48,23 +48,79 @@
                 All
             </button>
 
-            <button id="interviewTab" class="tab-btn bg-gray-200 text-gray-700 px-4 py-1.5 rounded-md text-sm">
+            <button id="interviewTab" class="tab-btn bg-white text-gray-700 px-4 py-1.5 rounded-md text-sm">
                 Interview
             </button>
 
-            <button id="rejectedTab" class="tab-btn bg-gray-200 text-gray-700 px-4 py-1.5 rounded-md text-sm">
+            <button id="rejectedTab" class="tab-btn bg-white text-gray-700 px-4 py-1.5 rounded-md text-sm">
                 Rejected
             </button>
         </div>
 
-        <!-- show joblist according to tabs -->
-        <div id="jobContainer" class="space-y-4"></div>
- <!-- No Jobs  -->
+        <!-- jobs ========= -->
+        <!-- job card -->
+        <div id="jobContainer" class="space-y-4">
+            <div class="bg-white p-5 rounded-lg shadow-sm">
+
+
+                <div class="flex justify-between items-start">
+
+                    <!-- Left Content -->
+                    <div>
+                        <h3 class="font-semibold text-gray-800">Mobile First Corp</h3>
+                        <p class="text-sm text-gray-600">React Native Developer</p>
+                        <p class="text-xs text-gray-500 mt-1">
+                            Remote • Full-time • $130,000 - $175,000
+                        </p>
+                    </div>
+
+                    <!-- Delete Button right side -->
+                    <button
+                        class="w-8 h-8 flex items-center justify-center border border-gray-300 bg-gray-100 rounded-full text-gray-500 hover:bg-red-100 hover:text-red-600 cursor-pointer ">
+                        <i class="fa-solid fa-trash text-sm"></i>
+                    </button>
+
+                </div>
+
+                <!-- Status Badge -->
+                <div class="mt-2">
+                    <span class="inline-block text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600">
+                        Not Applied
+                    </span>
+                </div>
+
+                <!-- Job Description -->
+                <p class="text-sm text-gray-600 mt-3">
+                    Build cross-platform mobile applications using React Native. Work on products used by millions
+                    worldwide.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="mt-4 flex gap-3">
+                    <button id="interviewCount"
+                        class="border border-green-500 text-green-600 text-sm px-3 py-1 rounded hover:bg-green-50">
+                        Interview
+                    </button>
+
+                    <button id="rejectedCount"
+                        class="border border-red-500 text-red-600 text-sm px-3 py-1 rounded hover:bg-red-50">
+                        Rejected
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- end card -->
+
+        </div>
+
+        <!-- end jobs -->
+
+        <!-- No Jobs  -->
         <div class="text-center bg-white py-10 text-gray-500 rounded-2xl">
-           
+
             <div class="flex justify-center mb-4">
-                <img src="./assets/images/jobs.png" alt="No jobs "
-                    class="w-40 h-auto opacity-80" />
+                <img src="./assets/images/jobs.png" alt="No jobs " class="w-40 h-auto opacity-80" />
             </div>
 
             <p class="font-medium text-lg">No Jobs Available</p>
